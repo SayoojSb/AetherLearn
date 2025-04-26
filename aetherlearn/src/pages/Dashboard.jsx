@@ -1,9 +1,10 @@
-import React from "react";
-import '../styles/Home.css'
+// src/pages/Dashboard.jsx
+import React from 'react';
+import '../styles/Dashboard.css';
 
-function Home() {
+function Dashboard() {
   return (
-    <div className="home-container">
+    <div className="dashboard-container">
       {/* Header */}
       <header className="header">
         <div className="logo">
@@ -11,9 +12,11 @@ function Home() {
         </div>
         <nav>
           <ul>
-            <li><a href="/">Home</a></li>
-            <li><a href="/login">Login</a></li>
-            <li><a href="/register">Sign Up</a></li>
+            <li><a href="#">Home</a></li>
+            <li><a href="/myflashcards">My flashcards</a></li>
+            <li><a href="#">Quiz</a></li>
+            <li><a href="#">About</a></li>
+            <li><a href="#">Profile</a></li>
           </ul>
         </nav>
       </header>
@@ -22,7 +25,8 @@ function Home() {
       <section className="main-section">
         <h2>Welcome to AetherLearn</h2>
         <p>Your gateway to smarter, visual learning!</p>
-        <a className="cta-btn" href="/dashboard">Get Started</a>
+        <a className="cta-btn" href="#">Start learning</a>
+        <a className="cta-btn" href="createflashcard">Add flashcard</a>
       </section>
 
       {/* Footer */}
@@ -33,4 +37,4 @@ function Home() {
   );
 }
 
-export default Home;
+export default Dashboard;
