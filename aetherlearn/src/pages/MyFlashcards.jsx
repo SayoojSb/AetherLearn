@@ -20,12 +20,11 @@ function MyFlashcards() {
     setSelectedCardIndex(null);
   };
 
-  const handleNextCard = (response) => {
-    // Optionally store user response here (e.g., for spaced repetition)
+  const handleNextCard = () => {
     if (selectedCardIndex + 1 < flashcards.length) {
       setSelectedCardIndex(selectedCardIndex + 1);
     } else {
-      setSelectedCardIndex(null); // end review
+      setSelectedCardIndex(null);
     }
   };
 
