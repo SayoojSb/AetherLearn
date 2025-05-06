@@ -12,7 +12,7 @@ function Dashboard() {
         </div>
         <nav>
           <ul>
-            <li><a href="#">Home</a></li>
+            <li><a href="/">Home</a></li>
             <li><a href="/myflashcards">My flashcards</a></li>
             <li><a href="#">Quiz</a></li>
             <li><a href="#">About</a></li>
@@ -25,7 +25,7 @@ function Dashboard() {
       <section className="main-section">
         <h2>Welcome to AetherLearn</h2>
         <p>Your gateway to smarter, visual learning!</p>
-        <a className="cta-btn" href="#">Start learning</a>
+        <a className="cta-btn" href="/myflashcards">Start learning</a>
         <a className="cta-btn" href="createflashcard">Add flashcard</a>
       </section>
 

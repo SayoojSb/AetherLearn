@@ -1,37 +1,32 @@
-/* src/styles/FlashcardItem.css */
 .flashcard-item {
-    background-color: #fff;
-    border: 1px solid #ccc;
-    border-radius: 10px;
-    padding: 1rem;
-    margin-bottom: 1rem;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-  }
-  
-  .flashcard-header h3 {
-    font-size: 1.3rem;
-    color: #333;
-  }
-  
-  .flashcard-header p {
-    font-size: 1.1rem;
-    color: #777;
-  }
-  
-  .flashcard-body {
-    margin-top: 1rem;
-  }
-  
-  .flashcard-body p {
-    font-size: 1rem;
-    color: #555;
-  }
-  
-  .flashcard-image {
-    width: 100%;
-    max-height: 200px;
-    object-fit: cover;
-    margin-top: 1rem;
-    border-radius: 8px;
-  }
-  
+  position: relative;
+  padding: 1rem;
+  border-radius: 8px;
+  background: white;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  margin-bottom: 1rem;
+  margin-left: 3rem;
+  margin-right: 3rem;
+  transition: transform 0.2s ease;
+  cursor: pointer;
+}
+
+.flashcard-header {
+  position: relative;
+}
+
+.delete-button {
+  position: absolute;
+  top: 0.5rem;
+  right: 0.5rem;
+  background: transparent;
+  border: none;
+  font-size: 1.5rem;
+  color: #232324;
+  cursor: pointer;
+  transition: color 0.2s ease;
+}
+
+.delete-button:hover {
+  color: #d9363e;
+}

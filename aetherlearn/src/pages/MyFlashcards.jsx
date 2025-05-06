@@ -29,6 +29,13 @@ function MyFlashcards() {
     }
   };
 
+  const handleDeleteCard = (indexToDelete) => {
+    const updatedFlashcards = flashcards.filter((_, index) => index !== indexToDelete);
+    setFlashcards(updatedFlashcards);
+    localStorage.setItem('flashcards', JSON.stringify(updatedFlashcards));
+  };
+  
+
   return (
     <div className="my-flashcards-container">
       <header className="my-flashcards-header">
@@ -39,20 +46,22 @@ function MyFlashcards() {
       </header>
 
       <div className="flashcard-list">
-        {flashcards.length > 0 ? (
-          flashcards.map((flashcard, index) => (
-            <div key={index} onClick={() => handleCardClick(index)}>
-              <FlashcardItem
-                title={flashcard.title}
-                term={flashcard.term}
-                description={flashcard.description}
-                image={flashcard.image}
-              />
-            </div>
-          ))
-        ) : (
-          <p>No flashcards found. Create some!</p>
-        )}
+      {flashcards.map((flashcard, index) => {
+        if (!flashcard || !flashcard.title) return null;
+        return (
+          <div key={index}>
+            <FlashcardItem
+              title={flashcard.title}
+              term={flashcard.term}
+              description={flashcard.description}
+              image={flashcard.image}
+              onDelete={() => handleDeleteCard(index)}
+              onClick={() => handleCardClick(index)}  // still allow review
+            />
+          </div>
+        );
+      })}
+
       </div>
 
       {selectedCardIndex !== null && (
