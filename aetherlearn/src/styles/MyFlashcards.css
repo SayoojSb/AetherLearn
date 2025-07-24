@@ -1,85 +1,118 @@
 .my-flashcards-container {
+  font-family: inherit;
+  color: white;
+  max-width: 800px;
+  margin: 20px auto;
   padding: 20px;
-  background-color: #f9f9f9;
+  background: linear-gradient(#212121, #212121) padding-box,
+              linear-gradient(145deg, transparent 35%,#e81cff, #40c9ff) border-box;
+  border: 2px solid transparent;
+  border-radius: 16px;
+  box-sizing: border-box;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
 }
 
-.my-flashcards-header {
+.my-flashcards-container h1 {
+  color: white;
+  text-align: center;
+  margin-bottom: 25px;
+  font-size: 2.2em;
+}
+
+.search-box-container {
+  width: 100%;
+  margin-bottom: 20px;
+}
+
+.flashcard-set-search-input {
+  width: 100%;
+  padding: 12px 16px;
+  border-radius: 8px;
+  color: #fff;
+  font-family: inherit;
+  background-color: transparent;
+  border: 1px solid #414141;
+  box-sizing: border-box;
+  font-size: 1rem;
+  transition: border-color 0.2s ease;
+}
+
+.flashcard-set-search-input::placeholder {
+  opacity: 0.5;
+  color: #a0a0a0;
+}
+
+.flashcard-set-search-input:focus {
+  outline: none;
+  border-color: #e81cff;
+}
+
+.no-sets-message {
+  text-align: center;
+  color: #717171;
+  font-style: italic;
+  padding: 30px;
+  border: 1px dashed #414141;
+  border-radius: 8px;
+  margin-top: 30px;
+}
+
+.flashcard-sets-list {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+  gap: 20px;
+}
+
+.flashcard-set-item {
+  background-color: #2a2a2a;
+  padding: 20px;
+  border-radius: 10px;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+  text-align: center;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+  cursor: pointer;
+  border: 1px solid #333;
+}
+
+.flashcard-set-item:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 6px 15px rgba(0, 0, 0, 0.4);
+}
+
+.flashcard-set-item h2 {
+  margin: 0;
+  color: #40c9ff;
+  font-size: 1.5em;
+  word-break: break-word;
+}
+
+/* header css */
+.myflashcards-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 20px 40px;
+  background-color: #111010;
+  flex-wrap: wrap;
+}
+.myflashcards-header nav ul{
   display: flex;
   justify-content: center;
   align-items: center;
+  gap: 30px;
 }
 
-.my-flashcards-header h2 {
-  position: absolute;
-  left: 2.5rem;
-  padding: 6rem 0 0 7rem;
-}
-
-.search-bar input {
-  margin-top: 1rem;
-  padding: 0.8rem;
-  font-size: 1rem;
-  width: 25rem;
-  border-radius: 5px;
-  border: 1px solid #ccc;
-}
-
-.flashcard-list {
-  margin: 4rem;
-  height: 100vh;
-}
-
-
-
-.flashcard-modal {
-  position: fixed;
-  top: 0; left: 0;
-  width: 100%; height: 100%;
-  background: rgba(0, 0, 0, 0.6);
-  display: flex; align-items: center; justify-content: center;
-  z-index: 1000;
-}
-
-.modal-content {
-  background: white;
-  padding: 2rem;
-  border-radius: 12px;
-  width: 90%;
-  max-width: 500px;
-  text-align: center;
-  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
-}
-
-.flashcard-review p {
-  margin: 0.5rem 0;
-}
-
-.card {
-  background: #f9f9f9;
-  padding: 1.5rem;
-  margin: 1rem 0;
-  border-radius: 10px;
-  cursor: pointer;
-  transition: transform 0.3s ease, background-color 0.3s ease;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-}
-
-.card.flipped {
-  background: #d3f4e2;
-}
-
-.review-actions button {
-  margin: 0.5rem;
-  padding: 0.6rem 1.2rem;
-  border: none;
-  border-radius: 6px;
-  cursor: pointer;
-  background-color: #007bff;
-  color: white;
+.logo a {
+  color: #4c6ef5;
+  margin: 0;
+  text-decoration: none;
+  font-size: 1.8em;
   font-weight: bold;
-  transition: background-color 0.2s ease;
 }
-
-.review-actions button:hover {
-  background-color: #0056b3;
+.plus-icon{
+  height: 45px;
+  width: 45px;
 }

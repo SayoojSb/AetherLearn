@@ -1,77 +1,81 @@
-import React, { useState, useEffect } from 'react';
-import FlashcardItem from '../components/FlashcardItem';
-import FlashcardReviewModal from '../components/FlashcardReviewModal';
+import React, { useState, useEffect, useMemo } from 'react';
+import { useNavigate } from 'react-router-dom';
 import '../styles/MyFlashcards.css';
+import plusIcon from '../assets/plus.png'
 
-function MyFlashcards() {
-  const [flashcards, setFlashcards] = useState([]);
-  const [selectedCardIndex, setSelectedCardIndex] = useState(null);
+function MyFlashcard() {
+    const [flashcardSets, setFlashcardSets] = useState([]);
+    const [searchQuery, setSearchQuery] = useState('');
+    const navigate = useNavigate();
 
-  useEffect(() => {
-    const storedFlashcards = JSON.parse(localStorage.getItem('flashcards')) || [];
-    setFlashcards(storedFlashcards);
-  }, []);
+    useEffect(() => {
+        const storedSets = JSON.parse(localStorage.getItem('flashcardSets')) || [];
+        setFlashcardSets(storedSets);
+    }, []);
 
-  const handleCardClick = (index) => {
-    setSelectedCardIndex(index);
-  };
+    const handleSetClick = (setId) => {
+        navigate(`/review-set/${setId}`);
+    };
 
-  const handleCloseModal = () => {
-    setSelectedCardIndex(null);
-  };
-
-  const handleNextCard = () => {
-    if (selectedCardIndex + 1 < flashcards.length) {
-      setSelectedCardIndex(selectedCardIndex + 1);
-    } else {
-      setSelectedCardIndex(null);
-    }
-  };
-
-  const handleDeleteCard = (indexToDelete) => {
-    const updatedFlashcards = flashcards.filter((_, index) => index !== indexToDelete);
-    setFlashcards(updatedFlashcards);
-    localStorage.setItem('flashcards', JSON.stringify(updatedFlashcards));
-  };
-  
-
-  return (
-    <div className="my-flashcards-container">
-      <header className="my-flashcards-header">
-        <h2>My Flashcards</h2>
-        <div className="search-bar">
-          <input type="text" placeholder="Search flashcards" />
-        </div>
-      </header>
-
-      <div className="flashcard-list">
-      {flashcards.map((flashcard, index) => {
-        if (!flashcard || !flashcard.title) return null;
-        return (
-          <div key={index}>
-            <FlashcardItem
-              title={flashcard.title}
-              term={flashcard.term}
-              description={flashcard.description}
-              image={flashcard.image}
-              onDelete={() => handleDeleteCard(index)}
-              onClick={() => handleCardClick(index)}  // still allow review
-            />
-          </div>
+    const filteredFlashcardSets = useMemo(() => {
+        if (!searchQuery) {
+            return flashcardSets;
+        }
+        const lowerCaseQuery = searchQuery.toLowerCase();
+        return flashcardSets.filter(set =>
+            set.title.toLowerCase().includes(lowerCaseQuery)
         );
-      })}
+    }, [flashcardSets, searchQuery]);
 
-      </div>
+    return (
+        <>
+          <header className="myflashcards-header">
+            <div className="logo">
+            <a href="/">AetherLearn</a>
+            </div>
+            <nav>
+              <ul>
+                <li><a href="/createflashcard"><img src={plusIcon} alt="Create a flashcard set" className='plus-icon' /></a></li>
+                <li><a href="/dashboard">Dashboard</a></li>
+              </ul>
+            </nav>
+          </header>
+        <div className="my-flashcards-container">
+            <h1>My Flashcard Sets</h1>
 
-      {selectedCardIndex !== null && (
-        <FlashcardReviewModal
-          flashcard={flashcards[selectedCardIndex]}
-          onClose={handleCloseModal}
-          onNext={handleNextCard}
-        />
-      )}
-    </div>
-  );
+            <div className="search-box-container">
+                <input
+                    type="text"
+                    placeholder="Search flashcard sets by title..."
+                    value={searchQuery}
+                    onChange={(e) => setSearchQuery(e.target.value)}
+                    className="flashcard-set-search-input"
+                />
+            </div>
+
+            {filteredFlashcardSets.length === 0 ? (
+                <p className="no-sets-message">
+                    {searchQuery
+                        ? "No flashcard sets found matching your search."
+                        : "You haven't created any flashcard sets yet. Go to the 'Create New' page to add some!"
+                    }
+                </p>
+            ) : (
+                <div className="flashcard-sets-list">
+                    {filteredFlashcardSets.map((set) => ( 
+                        <div
+                            key={set.id}
+                            className="flashcard-set-item"
+                            onClick={() => handleSetClick(set.id)}
+                        >
+                            <h2>{set.title}</h2>
+                        </div>
+                    ))}
+                </div>
+            )}
+        </div>
+      </>
+    );
 }
 
-export default MyFlashcards;
+export default MyFlashcard;
