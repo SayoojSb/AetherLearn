@@ -1,111 +1,200 @@
+.register-page {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  background-color: var(--bg-primary);
+  position: relative;
+  overflow: hidden;
+}
+
+.register-page::before {
+  content: '';
+  position: fixed;
+  top: -20%;
+  right: -10%;
+  width: 600px;
+  height: 600px;
+  background: radial-gradient(circle, rgba(168,85,247,0.08) 0%, transparent 70%);
+  pointer-events: none;
+}
+
+.register-page::after {
+  content: '';
+  position: fixed;
+  bottom: -20%;
+  left: -10%;
+  width: 500px;
+  height: 500px;
+  background: radial-gradient(circle, rgba(99,102,241,0.07) 0%, transparent 70%);
+  pointer-events: none;
+}
+
+/* ── Auth Header (shared) ── */
+.auth-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0 48px;
+  height: 72px;
+  background: rgba(10,10,15,0.8);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border-bottom: 1px solid var(--border-subtle);
+  position: sticky;
+  top: 0;
+  z-index: 100;
+}
+
+.auth-header .logo a {
+  font-size: 1.4rem;
+  font-weight: 800;
+  letter-spacing: -0.5px;
+  background: var(--gradient-primary);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  text-decoration: none;
+}
+
 .register-container {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    min-height: calc(100vh - 80px); 
-    padding: 20px;
-    box-sizing: border-box;
-    flex-grow: 1; 
+  flex: 1;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 40px 24px;
+  position: relative;
+  z-index: 1;
 }
 
 .register-card {
-    width: 100%;
-    max-width: 400px;
-    background: linear-gradient(#212121, #212121) padding-box,
-                linear-gradient(145deg, transparent 35%,#e81cff, #40c9ff) border-box;
-    border: 2px solid transparent;
-    padding: 32px 24px;
-    font-size: 14px;
-    font-family: inherit;
-    color: white; 
-    display: flex;
-    flex-direction: column;
-    gap: 20px;
-    box-sizing: border-box;
-    border-radius: 16px;
-    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.5);
+  width: 100%;
+  max-width: 440px;
+  background: var(--bg-card);
+  border: 1px solid var(--border-default);
+  border-radius: var(--radius-xl);
+  padding: 40px 36px;
+  box-shadow: var(--shadow-lg), var(--shadow-glow);
 }
 
-.register-card h2 {
-    color: white;
-    text-align: center;
-    margin-bottom: 15px;
-    font-size: 2em;
+.register-card-header {
+  text-align: center;
+  margin-bottom: 32px;
+}
+
+.register-card-header h2 {
+  font-size: 1.75rem;
+  font-weight: 700;
+  letter-spacing: -0.5px;
+  color: var(--text-primary);
+  margin-bottom: 8px;
+}
+
+.register-card-header p {
+  font-size: 0.9rem;
+  color: var(--text-secondary);
 }
 
 .register-form {
-    display: flex;
-    flex-direction: column;
-    gap: 15px; 
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.form-field {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.form-field label {
+  font-size: 0.8rem;
+  font-weight: 600;
+  color: var(--text-secondary);
+  letter-spacing: 0.3px;
+  text-transform: uppercase;
 }
 
 .register-form input[type="text"],
-.register-form input[type="email"], 
+.register-form input[type="email"],
 .register-form input[type="password"] {
-    width: 100%;
-    padding: 12px 16px;
-    border-radius: 8px;
-    color: #fff;
-    font-family: inherit;
-    background-color: transparent;
-    border: 1px solid #414141;
-    box-sizing: border-box;
-    font-size: 1rem;
+  width: 100%;
+  padding: 12px 16px;
+  border-radius: var(--radius-md);
+  color: var(--text-primary);
+  background: var(--bg-input);
+  border: 1px solid var(--border-default);
+  font-size: 0.95rem;
+  transition: all var(--transition-fast);
+  outline: none;
 }
 
 .register-form input::placeholder {
-    opacity: 0.5;
-    color: #a0a0a0;
+  color: var(--text-muted);
 }
 
 .register-form input:focus {
-    outline: none;
-    border-color: #e81cff; 
+  border-color: var(--accent-blue);
+  background: var(--bg-elevated);
+  box-shadow: 0 0 0 3px rgba(99,102,241,0.12);
 }
 
-.register-form button[type="submit"] {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-family: inherit;
-    color: #717171; 
-    font-weight: 600;
-    width: 60%; 
-    margin: 10px auto 0; 
-    background: #313131;
-    border: 1px solid #414141;
-    padding: 12px 16px;
-    font-size: 1.1em; 
-    gap: 8px;
-    cursor: pointer;
-    border-radius: 6px;
-    transition: background-color 0.2s ease, border-color 0.2s ease, color 0.2s ease;
+.error-message {
+  font-size: 0.85rem;
+  color: #f87171;
+  background: rgba(248,113,113,0.08);
+  border: 1px solid rgba(248,113,113,0.2);
+  border-radius: var(--radius-sm);
+  padding: 10px 14px;
+  text-align: center;
 }
 
-.register-form button[type="submit"]:hover {
-    background-color: #fff;
-    border-color: #fff;
-    color: #212121; 
+.register-submit-btn {
+  width: 100%;
+  padding: 13px;
+  border-radius: var(--radius-md);
+  font-size: 0.95rem;
+  font-weight: 600;
+  background: var(--gradient-primary);
+  color: white;
+  border: none;
+  cursor: pointer;
+  transition: all var(--transition-base);
+  box-shadow: 0 4px 16px rgba(99,102,241,0.3);
+  margin-top: 4px;
 }
 
-.register-form button[type="submit"]:active {
-    scale: 0.95;
+.register-submit-btn:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 6px 24px rgba(99,102,241,0.45);
+}
+
+.register-submit-btn:active {
+  transform: translateY(0);
 }
 
 .login-text {
-    text-align: center;
-    font-size: 0.95em;
-    color: #a0a0a0; 
-    margin-top: 15px;
+  text-align: center;
+  font-size: 0.875rem;
+  color: var(--text-secondary);
+  margin-top: 8px;
+  padding-top: 20px;
+  border-top: 1px solid var(--border-subtle);
 }
 
 .login-text a {
-    color: #40c9ff; 
-    text-decoration: none;
-    transition: color 0.2s ease;
+  color: var(--text-accent);
+  font-weight: 600;
+  text-decoration: none;
+  transition: color var(--transition-fast);
 }
 
 .login-text a:hover {
-    color: #6ee6ff; 
-    text-decoration: underline;
+  color: var(--accent-blue-light);
+  text-decoration: underline;
+}
+
+@media (max-width: 480px) {
+  .register-card {
+    padding: 32px 24px;
+  }
 }

@@ -1,29 +1,38 @@
 # AetherLearn
 
-AetherLearn is an inclusive, visually-driven flashcard learning platform designed to make education accessible and engaging for everyone — especially students with hearing impairments, learning disabilities, or language processing challenges. It transforms complex information into easily digestible, visually rich flashcard content.
+**AetherLearn** is a visual flashcard learning platform built for students who learn better through images and simplified content — including learners with hearing impairments, learning disabilities, or language processing challenges.
+
+No audio. No clutter. Just clear, visual study material you build yourself.
+
+---
+
+## What is AetherLearn?
+
+AetherLearn lets you create flashcard sets where each card holds a **term**, a **definition**, and an optional **image URL** for visual context. You study by flipping cards, navigating at your own pace, and reinforcing concepts through visual association.
+
+It runs entirely in the browser — no backend, no account fees, no setup beyond `npm install`.
+
+---
+
+## Who is it for?
+
+| Learner type | How AetherLearn helps |
+|---|---|
+| **Students** | Break down subjects into bite-sized cards for exam prep or daily review |
+| **Hearing-impaired learners** | Fully visual — no audio dependency anywhere in the app |
+| **Diverse learners** | Image-paired cards offer an alternative to text-heavy study methods |
+| **Educators** | Build sets for students to study independently at their own pace |
 
 ---
 
 ## Features
 
-- **Landing Page** — Welcomes users and introduces the platform's mission for visual learners.
-- **User Authentication** — Simple client-side authentication with Login, Register, and Forgot Password flows.
-- **Dashboard** — Central hub to navigate between learning and creating flashcards.
-- **Create Flashcard Sets** — Build custom flashcard sets with terms, definitions, and optional image URLs for visual cues.
-- **My Flashcards** — View and search all created flashcard sets.
-- **Review Mode** — Interactive flip-card experience to study terms, view definitions, and see associated images.
-- **Profile Page** — Displays logged-in user info and allows logout.
-- **About Page** — Details the mission, vision, and inclusive design principles behind AetherLearn.
-
----
-
-## Tech Stack
-
-- **React 19** — UI library
-- **Vite** — Fast build tooling and development server
-- **React Router DOM v7** — Client-side routing
-- **CSS3** — Custom styles for each page and component
-- **LocalStorage** — Client-side data persistence for users and flashcard sets
+- **Flip-card study mode** — 3D card flip animation, progress bar, Previous / Next navigation
+- **Visual cues** — Attach any image URL to a card to pair a picture with the concept
+- **Unlimited sets** — Create as many sets as you need, each with as many cards as you want
+- **Instant search** — Filter your sets by title in real time on the My Flashcards page
+- **User accounts** — Register, log in, and keep your sets saved between sessions
+- **Inclusive design** — Minimal text, clear layout, image support throughout
 
 ---
 
@@ -31,98 +40,128 @@ AetherLearn is an inclusive, visually-driven flashcard learning platform designe
 
 ### Prerequisites
 
-- [Node.js](https://nodejs.org/) (v18 or higher recommended)
-- npm or any compatible package manager
+- [Node.js](https://nodejs.org/) v18 or higher
+- npm
 
-### Installation
+### Install and run
 
-1. Clone the repository:
+```bash
+# 1. Clone the repo
+git clone <repository-url>
+cd aetherlearn
 
-   ```bash
-   git clone <repository-url>
-   cd aetherlearn
-   ```
+# 2. Install dependencies
+npm install
 
-2. Install dependencies:
+# 3. Start the dev server
+npm run dev
+```
 
-   ```bash
-   npm install
-   ```
+Open **http://localhost:5173** in your browser.
 
-3. Start the development server:
-
-   ```bash
-   npm run dev
-   ```
-
-4. Open your browser and navigate to `http://localhost:5173`.
-
-### Build for Production
+### Build for production
 
 ```bash
 npm run build
 ```
 
-The production-ready files will be generated in the `dist/` folder.
+Output goes to `dist/`.
 
 ---
 
-## Usage Guide
+## How to use AetherLearn
 
-1. **Register** a new account or **Login** with existing credentials.
-2. From the **Dashboard**, choose to **Start Learning** or **Add Flashcard**.
-3. In **Create Flashcard Set**, enter a title and add as many flashcards as needed. Each card supports:
-   - **Term** — The concept or word to learn.
-   - **Definition** — The explanation or meaning.
-   - **Image URL** *(optional)* — A visual cue to enhance memory and comprehension.
-4. Visit **My Flashcards** to see all your sets and use the search bar to find specific topics.
-5. Click any set to enter **Review Mode**, where you can:
-   - Click the card to **flip** it and reveal the definition/image.
-   - Use **Previous** and **Next** buttons to navigate through cards.
-6. Access your **Profile** to view your username or **Logout** securely.
+### 1. Create an account
+Go to the landing page (`/`) and click **Get started free**. Register with a username and password.
+
+### 2. Create a flashcard set
+From the Dashboard or the **+ New Set** button in the nav, go to **Create a new set**:
+- Enter a **title** for the set (e.g. *Biology — Chapter 3: Cells*)
+- Add cards one by one. Each card has:
+  - **Term** — the word or concept
+  - **Definition** — the explanation
+  - **Image URL** *(optional)* — paste any image link to add a visual cue
+- Click **+ Add Card** to add more cards
+- Click **Save Set** when done
+
+### 3. Study your sets
+Go to **My Flashcards** to see all your sets. Use the search bar to filter by title.
+
+Click any set to enter **Review Mode**:
+- The card shows the **term** on the front
+- Click the card to **flip** it and reveal the definition (and image if you added one)
+- Use **← Previous** and **Next →** to move between cards
+- The progress bar at the top shows how far through the set you are
+- Click **Done** to return to My Flashcards
+
+### 4. Manage your profile
+Click **Profile** in the nav to see your account info. Click **Sign Out** to log out.
 
 ---
 
-## Project Structure
+## Project structure
 
 ```
 aetherlearn/
-├── public/                  # Static assets
+├── public/
+│   └── _redirects           # Vercel/Netlify SPA redirect rule
 ├── src/
-│   ├── assets/              # Images and icons
-│   ├── components/          # Reusable components (ReviewSet)
-│   ├── context/             # AuthContext for authentication state
-│   ├── pages/               # Page components (Home, Login, Dashboard, etc.)
-│   ├── styles/              # CSS files for each page/component
-│   ├── App.jsx              # Main app with routing
-│   ├── main.jsx             # Entry point
-│   ├── index.css            # Global styles
-│   └── App.css              # App-level styles
-├── index.html               # HTML template
-├── package.json             # Dependencies and scripts
-├── vite.config.js           # Vite configuration
-├── eslint.config.js         # ESLint configuration
-└── vercel.json              # Vercel deployment config
+│   ├── assets/              # Static images and icons
+│   ├── components/
+│   │   ├── Layout.jsx       # Shared layout wrapper (renders Navbar)
+│   │   ├── Navbar.jsx       # Shared navigation header for authenticated pages
+│   │   └── ReviewSet.jsx    # Flip-card study component
+│   ├── context/
+│   │   └── AuthContext.jsx  # Global auth state (login, logout, register)
+│   ├── pages/
+│   │   ├── Home.jsx         # Landing page (public)
+│   │   ├── Login.jsx        # Sign-in page
+│   │   ├── Register.jsx     # Registration page
+│   │   ├── ForgotPassword.jsx
+│   │   ├── Dashboard.jsx    # Post-login home
+│   │   ├── MyFlashcards.jsx # Set list with search
+│   │   ├── CreateFlashcardSet.jsx
+│   │   ├── Profile.jsx
+│   │   └── About.jsx
+│   ├── styles/              # Per-page and component CSS
+│   ├── App.jsx              # Routes and auth guards
+│   ├── main.jsx             # React entry point
+│   └── index.css            # Global CSS variables and base styles
+├── index.html
+├── package.json
+├── vite.config.js
+└── vercel.json
 ```
 
 ---
 
-## Future Improvements
+## Tech stack
 
-- Backend integration with real database and secure authentication
-- Image upload support instead of URL-only input
-- Spaced repetition algorithm for optimized learning
-- Progress tracking and statistics
-- Mobile app version
-- Multi-language support
+| Tool | Purpose |
+|---|---|
+| React 19 | UI |
+| Vite | Build tool and dev server |
+| React Router DOM v7 | Client-side routing |
+| CSS3 (custom properties) | Styling |
+| localStorage | Data persistence |
 
 ---
 
-## License
+## Deployment
 
-This project is open-source and available under the [MIT License](LICENSE).
+The project includes a `vercel.json` and a `public/_redirects` file for SPA routing on Vercel and Netlify respectively. Run `npm run build` and deploy the `dist/` folder to either platform.
+
+---
+
+## Possible future improvements
+
+- Real backend with secure authentication and a database
+- Image upload (instead of URL-only)
+- Spaced repetition algorithm
+- Study progress tracking and statistics
+- Shareable sets
+- Mobile app
 
 ---
 
 *Built with care for diverse learners. Together, we can make learning truly inclusive.*
-

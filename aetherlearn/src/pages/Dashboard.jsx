@@ -1,32 +1,24 @@
-import React from 'react';
 import '../styles/Dashboard.css';
 
 function Dashboard() {
   return (
     <div className="dashboard-container">
-      <header className="dash-header">
-        <div className="logo">
-          <a href="/">AetherLearn</a>
-        </div>
-        <nav>
-          <ul>
-            <li><a href="/">Home</a></li>
-            <li><a href="/myflashcards">My flashcards</a></li>
-            <li><a href="/about">About</a></li>
-            <li><a href="/profile">Profile</a></li>
-          </ul>
-        </nav>
-      </header>
-
       <section className="main-section">
-        <h2>Welcome to AetherLearn</h2>
-        <p>Your gateway to smarter, visual learning!</p>
-        <a className="cta-btn" href="/myflashcards">Start learning</a>
-        <a className="cta-btn" href="createflashcard">Add flashcard</a>
+        <h2>
+          Welcome to<br />
+          <span>AetherLearn</span>
+        </h2>
+        <p>
+          Your gateway to smarter, visual learning. Pick up where you left off or start something new.
+        </p>
+        <div className="dash-cta-group">
+          <a className="cta-primary" href="/myflashcards">Start Learning</a>
+          <a className="cta-secondary" href="/createflashcard">Add Deck</a>
+        </div>
       </section>
 
       <footer className="dash-footer">
-        <p>&copy; 2025 AetherLearn | All Rights Reserved</p>
+        <p>&copy; 2025 AetherLearn. All rights reserved.</p>
       </footer>
     </div>
   );

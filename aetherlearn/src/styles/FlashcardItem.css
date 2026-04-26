@@ -1,15 +1,16 @@
 .card-hover-content {
   position: absolute;
   inset: 0;
-  color: black;
+  color: var(--text-primary);
   padding: 1rem;
-  border-radius: 15px;
+  border-radius: var(--radius-lg);
   display: none;
   flex-direction: column;
   align-items: center;
   justify-content: center;
   text-align: center;
   overflow-y: auto;
+  background: var(--bg-elevated);
 }
 
 .card:hover .card-hover-content {
@@ -19,6 +20,6 @@
 .flashcard-image {
   width: 100px;
   margin-top: 1rem;
-  border-radius: 10px;
+  border-radius: var(--radius-sm);
+  border: 1px solid var(--border-subtle);
 }
-

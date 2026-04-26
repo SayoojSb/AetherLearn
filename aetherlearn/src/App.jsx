@@ -9,11 +9,12 @@ import ForgotPassword from "./pages/ForgotPassword";
 import Dashboard from "./pages/Dashboard";
 import CreateFlashcard from "./pages/CreateFlashcardSet";
 import MyFlashcards from './pages/MyFlashcards';
-import ReviewSet from "./components/ReviewSet"; 
+import ReviewSet from "./components/ReviewSet";
 import Profile from "./pages/Profile";
-import About from "./pages/About"; 
+import About from "./pages/About";
+import Layout from "./components/Layout";
 
-import './App.css'; 
+import './App.css';
 
 const PrivateRoute = ({ children }) => {
   const { isAuthenticated, isLoading } = useAuth(); 
@@ -48,11 +49,11 @@ function App() {
                 <Route path="/forgot-password" element={<ForgotPassword />} />
                 <Route path="/about" element={<About />} />
 
-                <Route path="/dashboard" element={<PrivateRoute><Dashboard /></PrivateRoute>} />
-                <Route path="/createflashcard" element={<PrivateRoute><CreateFlashcard /></PrivateRoute>} />
-                <Route path="/myflashcards" element={<PrivateRoute><MyFlashcards /></PrivateRoute>} />
-                <Route path="/review-set/:setId" element={<PrivateRoute><ReviewSet /></PrivateRoute>} />
-                <Route path="/profile" element={<PrivateRoute><Profile /></PrivateRoute>} />
+                <Route path="/dashboard" element={<PrivateRoute><Layout><Dashboard /></Layout></PrivateRoute>} />
+                <Route path="/createflashcard" element={<PrivateRoute><Layout><CreateFlashcard /></Layout></PrivateRoute>} />
+                <Route path="/myflashcards" element={<PrivateRoute><Layout><MyFlashcards /></Layout></PrivateRoute>} />
+                <Route path="/review-set/:setId" element={<PrivateRoute><Layout><ReviewSet /></Layout></PrivateRoute>} />
+                <Route path="/profile" element={<PrivateRoute><Layout><Profile /></Layout></PrivateRoute>} />
 
                 <Route
                     path="*"
