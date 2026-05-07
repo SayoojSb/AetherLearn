@@ -74,7 +74,7 @@ function ReviewSet() {
         </div>
 
         <div
-          className={`flashcard-card ${isFlipped ? 'flipped' : ''}`}
+          className={`flashcard-card ${isFlipped ? 'flipped' : ''} ${currentCard.imageUrl ? 'has-image' : ''}`}
           onClick={handleFlip}
         >
           <div className="flashcard-inner">

@@ -137,7 +137,25 @@
   flex-direction: column;
   align-items: center;
   text-align: center;
-  padding: 110px 24px 100px;
+  padding: 60px 24px;
+  position: relative;
+  z-index: 1;
+  min-height: calc(100vh - 72px);
+  justify-content: center;
+  box-sizing: border-box;
+}
+
+/* Liquid fluid background */
+.hero-liquid-bg {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  pointer-events: none;
+  opacity: 0.55;
+}
+
+/* All direct children of hero-section sit above the liquid */
+.hero-section > *:not(.hero-liquid-bg) {
   position: relative;
   z-index: 1;
 }

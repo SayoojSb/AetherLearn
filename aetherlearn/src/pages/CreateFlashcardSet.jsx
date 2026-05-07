@@ -1,5 +1,90 @@
-import { useState } from 'react';
+import { useState, useRef } from 'react';
 import '../styles/CreateFlashcardSet.css';
+
+// Converts a File to a base64 data URL
+function fileToDataUrl(file) {
+  return new Promise((resolve, reject) => {
+    const reader = new FileReader();
+    reader.onload = () => resolve(reader.result);
+    reader.onerror = reject;
+    reader.readAsDataURL(file);
+  });
+}
+
+function ImageDropZone({ cardId, imageUrl, onChange }) {
+  const [isDragging, setIsDragging] = useState(false);
+  const inputRef = useRef(null);
+
+  const handleFile = async (file) => {
+    if (!file || !file.type.startsWith('image/')) return;
+    const dataUrl = await fileToDataUrl(file);
+    onChange(cardId, 'imageUrl', dataUrl);
+  };
+
+  const handleDrop = (e) => {
+    e.preventDefault();
+    setIsDragging(false);
+    const file = e.dataTransfer.files[0];
+    handleFile(file);
+  };
+
+  const handleDragOver = (e) => {
+    e.preventDefault();
+    setIsDragging(true);
+  };
+
+  const handleDragLeave = () => setIsDragging(false);
+
+  const handleInputChange = (e) => {
+    const file = e.target.files[0];
+    handleFile(file);
+  };
+
+  const handleRemove = (e) => {
+    e.stopPropagation();
+    onChange(cardId, 'imageUrl', '');
+    if (inputRef.current) inputRef.current.value = '';
+  };
+
+  return (
+    <div className="form-group">
+      <label>Image (optional)</label>
+
+      {imageUrl ? (
+        <div className="image-preview-box">
+          <img src={imageUrl} alt="Card visual" className="image-preview" />
+          <button
+            type="button"
+            className="image-remove-btn"
+            onClick={handleRemove}
+            title="Remove image"
+          >
+            ×
+          </button>
+        </div>
+      ) : (
+        <div
+          className={`image-drop-zone ${isDragging ? 'dragging' : ''}`}
+          onDrop={handleDrop}
+          onDragOver={handleDragOver}
+          onDragLeave={handleDragLeave}
+          onClick={() => inputRef.current?.click()}
+        >
+          <div className="drop-zone-icon">🖼️</div>
+          <p className="drop-zone-text">Drop an image here</p>
+          <p className="drop-zone-sub">or click to browse</p>
+          <input
+            ref={inputRef}
+            type="file"
+            accept="image/*"
+            className="drop-zone-input"
+            onChange={handleInputChange}
+          />
+        </div>
+      )}
+    </div>
+  );
+}
 
 function CreateFlashcardSet() {
   const [setTitle, setSetTitle] = useState('');
@@ -101,16 +186,11 @@ function CreateFlashcardSet() {
                     />
                   </div>
 
-                  <div className="form-group">
-                    <label htmlFor={`imageUrl-${card.id}`}>Image URL (optional)</label>
-                    <input
-                      type="text"
-                      id={`imageUrl-${card.id}`}
-                      value={card.imageUrl}
-                      onChange={(e) => handleFlashcardChange(card.id, 'imageUrl', e.target.value)}
-                      placeholder="Paste an image URL"
-                    />
-                  </div>
+                  <ImageDropZone
+                    cardId={card.id}
+                    imageUrl={card.imageUrl}
+                    onChange={handleFlashcardChange}
+                  />
                 </div>
               </div>
             ))}

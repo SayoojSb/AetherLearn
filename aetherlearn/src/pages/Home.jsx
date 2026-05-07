@@ -1,3 +1,4 @@
+import LiquidEther from '../components/LiquidEther';
 import '../styles/Home.css';
 
 function Home() {
@@ -20,6 +21,22 @@ function Home() {
 
       {/* ── Hero ── */}
       <section className="hero-section">
+        {/* Liquid background */}
+        <div className="hero-liquid-bg">
+          <LiquidEther
+            colors={['#6366f1', '#a855f7', '#22d3ee', '#4f46e5']}
+            mouseForce={25}
+            cursorSize={120}
+            isViscous={false}
+            resolution={0.5}
+            autoDemo={true}
+            autoSpeed={0.4}
+            autoIntensity={2.5}
+            autoResumeDelay={2000}
+            autoRampDuration={0.8}
+            takeoverDuration={0.3}
+          />
+        </div>
         <div className="hero-badge">
           <span className="badge-dot"></span>
           Built for visual learners

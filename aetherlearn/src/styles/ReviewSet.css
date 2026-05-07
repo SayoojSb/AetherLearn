@@ -1,77 +1,16 @@
 .review-page {
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column;
   background-color: var(--bg-primary);
-}
-
-/* ── Header ── */
-.review-header {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  padding: 0 48px;
-  height: 72px;
-  background: rgba(10,10,15,0.85);
-  backdrop-filter: blur(20px);
-  -webkit-backdrop-filter: blur(20px);
-  border-bottom: 1px solid var(--border-subtle);
-  position: sticky;
-  top: 0;
-  z-index: 100;
-}
-
-.logo a {
-  font-size: 1.4rem;
-  font-weight: 800;
-  letter-spacing: -0.5px;
-  background: var(--gradient-primary);
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  background-clip: text;
-  text-decoration: none;
-}
-
-.review-header nav ul {
-  list-style: none;
-  display: flex;
-  gap: 8px;
-  align-items: center;
-  padding: 0;
-  margin: 0;
-}
-
-.review-header nav ul li a {
-  display: inline-flex;
-  align-items: center;
-  padding: 7px 16px;
-  border-radius: var(--radius-full);
-  font-size: 0.875rem;
-  font-weight: 500;
-  color: var(--text-secondary);
-  text-decoration: none;
-  transition: all var(--transition-base);
-  border: 1px solid transparent;
-}
-
-.review-header nav ul li a:hover {
-  color: var(--text-primary);
-  background: var(--bg-elevated);
-  border-color: var(--border-default);
 }
 
 /* ── Main ── */
 .review-set-container {
-  flex: 1;
   display: flex;
   flex-direction: column;
   align-items: center;
-  justify-content: center;
-  padding: 48px 24px;
-  max-width: 680px;
+  padding: 40px 24px 60px;
+  max-width: 900px;
   width: 100%;
   margin: 0 auto;
-  gap: 0;
 }
 
 .review-set-title {
@@ -85,18 +24,18 @@
 .card-counter {
   font-size: 0.85rem;
   color: var(--text-muted);
-  margin-bottom: 32px;
+  margin-bottom: 24px;
   text-align: center;
 }
 
 /* ── Progress Bar ── */
 .progress-bar-track {
   width: 100%;
-  max-width: 480px;
+  max-width: 780px;
   height: 3px;
   background: var(--border-subtle);
   border-radius: var(--radius-full);
-  margin-bottom: 40px;
+  margin-bottom: 32px;
   overflow: hidden;
 }
 
@@ -110,11 +49,17 @@
 /* ── Flashcard ── */
 .flashcard-card {
   width: 100%;
-  max-width: 480px;
-  height: 280px;
-  perspective: 1200px;
+  max-width: 780px;
+  height: 320px;
+  perspective: 1400px;
   cursor: pointer;
   margin-bottom: 32px;
+  flex-shrink: 0;
+}
+
+/* Taller card when the back has an image */
+.flashcard-card.has-image {
+  height: 620px;
 }
 
 .flashcard-inner {
@@ -133,8 +78,7 @@
 .flashcard-front,
 .flashcard-back {
   position: absolute;
-  width: 100%;
-  height: 100%;
+  inset: 0;
   -webkit-backface-visibility: hidden;
   backface-visibility: hidden;
   display: flex;
@@ -145,12 +89,11 @@
   border-radius: var(--radius-lg);
   box-sizing: border-box;
   border: 1px solid var(--border-default);
+  overflow: hidden;
 }
 
 .flashcard-front {
   background: var(--bg-card);
-  position: relative;
-  overflow: hidden;
 }
 
 .flashcard-front::before {
@@ -172,7 +115,7 @@
 }
 
 .flashcard-term {
-  font-size: 1.6rem;
+  font-size: 2rem;
   font-weight: 700;
   color: var(--text-primary);
   text-align: center;
@@ -183,23 +126,27 @@
 .flashcard-back {
   background: var(--bg-elevated);
   transform: rotateY(180deg);
-  overflow: auto;
-  gap: 12px;
+  gap: 20px;
+  justify-content: center;
+  padding: 32px;
 }
 
 .flashcard-description {
-  font-size: 1rem;
+  font-size: 1.15rem;
   color: var(--text-secondary);
   text-align: center;
-  line-height: 1.6;
+  line-height: 1.7;
+  flex-shrink: 0;
 }
 
 .flashcard-image {
-  max-width: 85%;
-  max-height: 100px;
+  width: 100%;
+  flex: 1;
+  min-height: 0;
   object-fit: contain;
-  border-radius: var(--radius-sm);
+  border-radius: var(--radius-md);
   border: 1px solid var(--border-subtle);
+  background: var(--bg-card);
 }
 
 /* ── Navigation ── */
@@ -207,7 +154,7 @@
   display: flex;
   gap: 12px;
   width: 100%;
-  max-width: 480px;
+  max-width: 780px;
   margin-bottom: 16px;
 }
 
@@ -269,25 +216,25 @@
 }
 
 @media (max-width: 768px) {
-  .review-header {
-    padding: 0 24px;
-  }
-
   .review-set-container {
-    padding: 32px 16px;
+    padding: 28px 16px 48px;
   }
 
   .flashcard-card {
-    height: 240px;
+    height: 260px;
+  }
+
+  .flashcard-card.has-image {
+    height: 500px;
   }
 }
 
 @media (max-width: 480px) {
-  .review-header {
-    padding: 0 16px;
+  .flashcard-term {
+    font-size: 1.5rem;
   }
 
-  .flashcard-term {
-    font-size: 1.3rem;
+  .flashcard-card.has-image {
+    height: 420px;
   }
 }
